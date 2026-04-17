@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  security-monitor:
+    build: .
+    container_name: security-monitor
+    image: security-monitor:latest
+
+    # Privileged mode for system-level monitoring
+    # Remove if not needed for your environment
+    privileged: true
+
+    # Network mode for monitoring host network
+    # Change to 'bridge' for isolated network
+    network_mode: host
+
+    # Environment variables
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+
+    # Volume mounts for persistence
+    volumes:
+      # Persist logs
+      - ./logs:/var/log/security_monitor
+
+      # Persist database
+      - ./data:/var/lib/security_monitor
+
+      # Optional: Mount host /proc for better system visibility
+      # - /proc:/host/proc:ro
+
+      # Optional: Mount host /sys for system information
+      # - /sys:/host/sys:ro
+
+    # Ports (only needed if not using host network mode)
+    # ports:
+    #   - "8080:8080"
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import requests; requests.get('http://localhost:8080/api/status')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Named volumes (alternative to bind mounts)
+volumes:
+  monitor-logs:
+    driver: local
+  monitor-data:
+    driver: local

@@ -1,0 +1,75 @@
+{
+  "scan_interval": 300,
+  "log_dir": "./logs",
+  "db_path": "./data/scans.db",
+  "scans": {
+    "integrity_check": {
+      "script": "./integrity_monitor.sh",
+      "enabled": true,
+      "interval": 3600,
+      "timeout": 300,
+      "description": "Monitor file integrity of critical system paths"
+    },
+    "log_analysis": {
+      "script": "./log_analyzer.sh",
+      "enabled": true,
+      "interval": 300,
+      "timeout": 120,
+      "description": "Analyze system logs for security events"
+    },
+    "log_analysis_fast": {
+      "script": "./log_analyzer_fast.sh",
+      "enabled": true,
+      "interval": 300,
+      "timeout": 60,
+      "description": "Fast log analysis with port scanning"
+    },
+    "memory_analysis": {
+      "script": "./memory_analysis.sh",
+      "enabled": true,
+      "interval": 1800,
+      "timeout": 300,
+      "description": "Scan for suspicious memory patterns and rootkits"
+    },
+    "keylogger_detection": {
+      "script": "./keylogger_detector.sh",
+      "enabled": true,
+      "interval": 600,
+      "timeout": 120,
+      "description": "Detect keyloggers and spyware"
+    },
+    "persistence_detection": {
+      "script": "./persistence_detector.sh",
+      "enabled": true,
+      "interval": 900,
+      "timeout": 180,
+      "description": "Detect malware persistence mechanisms"
+    },
+    "dns_detection": {
+      "script": "./dns_detector.sh",
+      "enabled": true,
+      "interval": 1800,
+      "timeout": 120,
+      "description": "Detect DNS hijacking and poisoning"
+    },
+    "compromise_check": {
+      "script": "./compromise_check.sh",
+      "enabled": true,
+      "interval": 1200,
+      "timeout": 180,
+      "description": "Check for active compromise indicators"
+    }
+  },
+  "alerts": {
+    "enabled": true,
+    "severity_threshold": "MEDIUM"
+  },
+  "auto_response": {
+    "enabled": false,
+    "actions": {
+      "kill_malicious_process": false,
+      "block_network": false,
+      "quarantine_file": false
+    }
+  }
+}

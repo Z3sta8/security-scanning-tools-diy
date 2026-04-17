@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>DB_PATH</key>
+		<string>/Users/zesta8/security_scanning_tools_diy/data/scans.db</string>
+		<key>FLASK_ENV</key>
+		<string>production</string>
+		<key>LOG_DIR</key>
+		<string>/Users/zesta8/security_scanning_tools_diy/logs</string>
+		<key>PYTHONPATH</key>
+		<string>/Users/zesta8/security_scanning_tools_diy</string>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.security.dashboard</string>
+	<key>Nice</key>
+	<integer>15</integer>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+		<string>/Users/zesta8/security_scanning_tools_diy/web_dashboard.py</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>Socket</key>
+	<dict>
+		<key>ItemList</key>
+		<array>
+			<string>8080</string>
+		</array>
+	</dict>
+	<key>StandardErrorPath</key>
+	<string>/Users/zesta8/security_scanning_tools_diy/logs/dashboard.stderr.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/zesta8/security_scanning_tools_diy/logs/dashboard.stdout.log</string>
+	<key>ThrottleInterval</key>
+	<integer>10</integer>
+	<key>WorkingDirectory</key>
+	<string>/Users/zesta8/security_scanning_tools_diy</string>
+</dict>
+</plist>
